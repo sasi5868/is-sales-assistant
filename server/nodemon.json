@@ -1,0 +1,7 @@
+{
+    "env": {
+      "MONGO_ATLAS_PW": "sasi",
+      "JWT_KEY": "SECRET_HASH_KEY_FOR_JSON_WEBTOKEN"
+    }
+  }
+  
