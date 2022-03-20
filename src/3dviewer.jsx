@@ -46,12 +46,14 @@ class ThreeDViewer extends Component {
 
   playAudio() {
     this.currentActionIndex = 0;
+    let _this =this;
     const audioPromise = this.audio.play();
     this.mixer.addEventListener("finished", this.playNextAction);
-    this.playNextAction();
+    
     if (audioPromise !== undefined) {
       audioPromise
         .then((_) => {
+          _this.playNextAction();
           // autoplay started
         })
         .catch((err) => {
@@ -230,7 +232,7 @@ class ThreeDViewer extends Component {
   InitScene() {
     this.camera = new THREE.PerspectiveCamera(
       45,
-      window.innerWidth / window.innerHeight,
+      (window.innerWidth/2) / (window.innerHeight/2),
       1,
       20000
     );
@@ -240,7 +242,7 @@ class ThreeDViewer extends Component {
       canvas: this.mount,
       alpha: true,
     });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(window.innerWidth/2, window.innerHeight/2);
 
     const light = new THREE.AmbientLight(0x404040); // soft white light
     this.scene.add(light);
@@ -272,11 +274,11 @@ class ThreeDViewer extends Component {
             }}
           />
         </div>
-        <button
+        <button className="button text-red-800 font-bold "
           style={{
-            position: "absolute",
+            position: "relative",
             bottom: "50px",
-            left: "30px",
+            left: "0px",
             fontSize: "large",
           }}
           onClick={() => this.playAudio()}

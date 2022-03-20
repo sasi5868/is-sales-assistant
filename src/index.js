@@ -8,7 +8,7 @@ import Dashboard from './dashboard';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThreeDViewer />
+    <Dashboard />
   </React.StrictMode>,
   document.getElementById('root')
 );

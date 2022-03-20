@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 
 import Papa from "papaparse";
-
+import TableCar from "./Table"
+import ThreeDViewer from "./3dviewer";
+import ThreeDViewerCar from "./3dviewer car";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -11,58 +13,29 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.ExtractData();
+
   }
 
-  async fetchCsv() {
-    const response = await fetch("data/data.csv");
-    const reader = response.body.getReader();
-    const result = await reader.read();
-    const decoder = new TextDecoder("utf-8");
-    const csv = await decoder.decode(result.value);
-    console.log("csv", csv);
-    return csv;
-  }
-
-  async ExtractData() {
-    const csvData = Papa.parse(await this.fetchCsv());
-    console.log(csvData);
-    this.setState({ tabledata: csvData.data });
-  }
 
   render() {
     return (
       <>
-        {this.state.tabledata && this.state.tabledata.length > 0 && (
-          <div
-            style={{
-              marginTop: "10px",
-              marginLeft: "10px",
-              position: "relative",
-            }}
-          >
-            <table style={{ border: "1px solid black" }}>
-              {this.state.tabledata.map((item, index) => {
-                return (
-                  <tr style={{ border: "1px solid black" }}>
-                    {index === 2 ? (
-                      <td colSpan={24} style={{ backgroundColor: "gray" }}>
-                        EmtpyRow sfv ext-sm font-medium text-gray-900
-                        whitespace-nowrap dark:text-gray-600{" "}
-                      </td>
-                    ) : (
-                      <>
-                        {item.map((cell) => (
-                          <td> {cell}</td>
-                        ))}
-                      </>
-                    )}
-                  </tr>
-                );
-              })}
-            </table>
-          </div>
-        )}
+      <div className="flex flex-row">
+        <div class="grid grid-cols-2 divide-x">
+        <div >
+   
+        <TableCar/>
+        </div>
+      <div className="grid grid-rows-2">
+   
+        <ThreeDViewerCar/>
+           
+        <ThreeDViewer/>
+      </div>
+      </div>
+      </div>
+
+    
       </>
     );
   }

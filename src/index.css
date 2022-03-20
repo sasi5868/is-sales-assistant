@@ -1,3 +1,8 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,12 +16,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-html, body {
-	overflow: hidden;
-	margin: 0;
-	width: 100%;
-	height: 100%;
-}
+
 
 #loading-screen {
 	position: absolute;
@@ -98,11 +98,3 @@ html, body {
         transform: rotate(360deg);
     }
 }
-table, td, th {
-    border: 1px solid;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
