@@ -49,11 +49,11 @@ class ThreeDViewer extends Component {
     let _this =this;
     const audioPromise = this.audio.play();
     this.mixer.addEventListener("finished", this.playNextAction);
-    
+    _this.playNextAction();
     if (audioPromise !== undefined) {
       audioPromise
         .then((_) => {
-          _this.playNextAction();
+    
           // autoplay started
         })
         .catch((err) => {
