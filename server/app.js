@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 app.use("/images_png", express.static(path.join("images_png")));
 app.use("/intent_tts_audio", express.static(path.join("intent_tts_audio")));
-app.use("/", express.static(path.join(__dirname, "bbnl")));
+app.use("/", express.static(path.join(__dirname, "build")));
 app.use("/data", express.static(path.join(__dirname, "data/response")));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -48,7 +48,7 @@ app.use("/api/devTest", devTestRoute);
 app.use("/api/user", userRoute);
 // GET home page.
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "bbnl", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 module.exports = app;

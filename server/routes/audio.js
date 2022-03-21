@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     console.log("fileName",req.params,req.body,file.originalname);
     const isValid = MIME_TYPE_MAP[file.mimetype];
-    const audio_wav_dir = 'data/audio/sasi@gmail.com';
+    const audio_wav_dir = 'data/inputAudio';
     var fs = require('fs');
     let dir = audio_wav_dir;
     console.log("audio destination", dir);

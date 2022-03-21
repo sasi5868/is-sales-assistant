@@ -75,7 +75,7 @@ exports.postAudio = async (req, res, next) => {
   console.log("saved audio file using multer", req.body.name);
   nlpResponse = {};
 
-  asrInputFile = "/home/istl/demo/voice_channel_navigation/backend/data/audio/sasi@gmail.com/" + req.body.name;
+  asrInputFile = "/home/istl/demo/voice_channel_navigation/backend/data/inputAudio/" + req.body.name;
   console.log("asrInputFile: ",asrInputFile);
   asrResponseFileName = req.body.name.replace("wav", "txt");
   asrResponseFilePath = "/home/istl/build/bbnl_english_nlp/process_dir/" + asrResponseFileName;

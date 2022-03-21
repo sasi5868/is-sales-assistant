@@ -45,4 +45,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-data/audio/sasi@gmail.com/*.wav
+data/inputAudio/*.wav
