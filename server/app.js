@@ -7,7 +7,7 @@ const audioRoute = require("./routes/audio");
 // const audioBbnlRoute = require("./routes/audio_bbnl");
 const devTestRoute = require("./routes/devTest");
 const userRoute = require("./routes/user");
-
+const cors = require("cors");
 const app = express();
 
 // mongodb+srv://sasi:<password>@cluster0.44riq.azure.mongodb.net/<dbname>?retryWrites=true&w=majority
@@ -23,11 +23,12 @@ mongoose
   });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
 app.use("/images_png", express.static(path.join("images_png")));
 app.use("/intent_tts_audio", express.static(path.join("intent_tts_audio")));
 app.use("/", express.static(path.join(__dirname, "bbnl")));
-
+app.use("/data", express.static(path.join(__dirname, "data/response")));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(

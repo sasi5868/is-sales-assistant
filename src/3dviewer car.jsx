@@ -151,7 +151,7 @@ class ThreeDViewerCar extends Component {
       <>
 
         <div>
-          <img className="w-full h-full object-cover" src={gifFile} ></img>
+          <img className="w-full h-full object-cover" src={this.props.GifFile?this.props.GifFile:gifFile} ></img>
           {/* <canvas
             ref={(ref) => (this.mount = ref)}
             style={{

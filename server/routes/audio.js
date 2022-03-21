@@ -15,6 +15,7 @@ const MIME_TYPE_MAP = {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    console.log("fileName",req.params,req.body,file.originalname);
     const isValid = MIME_TYPE_MAP[file.mimetype];
     const audio_wav_dir = 'data/audio/sasi@gmail.com';
     var fs = require('fs');
@@ -31,9 +32,9 @@ const storage = multer.diskStorage({
     // cb(file, dir);
   },
   filename: function (req, file, cb) {
-    console.log("fileName",req.body.name);
+   
     cb(null, Date.now() + path.extname(file.originalname))
-    cb(null, req.body.name);
+    // cb(null, req.body.name);
   },
 });
 

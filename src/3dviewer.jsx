@@ -30,6 +30,7 @@ class ThreeDViewer extends Component {
     this.playNextAction = this.playNextAction.bind(this);
     this.animate = this.animate.bind(this);
     this.Mp3Recorder = null;
+    this.Anim=null;
   }
   async fetchTsp() {
     const response = await fetch("data/TTS_ALIGN_FILE.tsp");
@@ -42,7 +43,7 @@ class ThreeDViewer extends Component {
     return tsp;
   }
   componentDidMount() {
-    this.fetchTsp();
+    // this.fetchTsp();
     this.InitScene();
     this.loadModel();
     this.audio = new Audio(audiofile);
@@ -64,6 +65,7 @@ class ThreeDViewer extends Component {
   playAudio() {
     this.currentActionIndex = 0;
     let _this = this;
+    this.SetFrames(this.Anim);
     const audioPromise = this.audio.play();
     this.mixer.addEventListener("finished", this.playNextAction);
     _this.playNextAction();
@@ -126,9 +128,9 @@ class ThreeDViewer extends Component {
     //   action.loop = THREE.LoopOnce;
     //   this.actions.push(action);
     // }
-    for (let i = 0; i < this.state.TSPData.length; i++) {
-      let char = this.state.TSPData[i].split(" ")[0];
-      let duration = this.state.TSPData[i].split(" ")[1];
+    for (let i = 0; i < this.props.TSPData.length; i++) {
+      let char = this.props.TSPData[i].split(" ")[0];
+      let duration = this.props.TSPData[i].split(" ")[1];
       let clipchar = expressions.filter((item) =>
         item.char.includes(char.toUpperCase())
       );
@@ -207,8 +209,8 @@ class ThreeDViewer extends Component {
         return prev.duration > current.duration ? prev : current;
       });
       console.log("max", max);
-      let Anim = max.clone();
-      _this.SetFrames(Anim);
+    _this.Anim = max.clone();
+     
 
       object.traverse(function (child) {
         if (child.isMesh) {
@@ -286,12 +288,29 @@ class ThreeDViewer extends Component {
         .catch((e) => console.error(e));
     }
   };
+  blobToDataURL(blob, callback) {
+    var a = new FileReader();
+    a.onload = function(e) {callback(e.target.result);}
+    a.readAsDataURL(blob);
+}
   stop = () => {
+    let _this=this;
     this.Mp3Recorder.stop()
       .getMp3()
       .then(([buffer, blob]) => {
         const blobURL = URL.createObjectURL(blob);
         this.setState({ blobURL, isRecording: false });
+        console.log(blobURL);
+        setTimeout(() => {
+          this.blobToDataURL(blob, function(dataurl){
+            setTimeout(() => {
+              _this.props.GetData(dataurl)
+            }, 1000);
+       
+        });
+        }, 100);
+    
+      
       })
       .catch((e) => console.log(e));
   };
