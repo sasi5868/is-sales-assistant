@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-
+import gifFile from "./data/car_gifs/Ford_Ecosport.gif"
 // import BackgroundImg from "./images/background.jpg"
 class ThreeDViewerCar extends Component {
   constructor(props) {
@@ -25,8 +25,8 @@ class ThreeDViewerCar extends Component {
 
   componentDidMount() {
 
-    this.InitScene();
-    this.loadModel();
+    // this.InitScene();
+    // this.loadModel();
 
   }
 
@@ -151,13 +151,14 @@ class ThreeDViewerCar extends Component {
       <>
 
         <div>
-          <canvas
+          <img className="w-full h-full object-cover" src={gifFile} ></img>
+          {/* <canvas
             ref={(ref) => (this.mount = ref)}
             style={{
               backgroundImage: "url('/envMaps/background.jpg')",
               backgroundSize: "cover",
             }}
-          />
+          /> */}
         </div>
         </>
 

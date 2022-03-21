@@ -11,8 +11,13 @@ const options = {
   cert: fs.readFileSync('cert.pem')
 }
 
-https.createServer(options,app).listen(3000);
+// https.createServer(options,app).listen(3005,()=>{
+//   console.log('listening on port 3005');
+// })
 
+app.listen(3005,()=>{
+  console.log('listening on port 3005');
+})
 // const normalizePort = val => {
 //   var port = parseInt(val, 10);
 
