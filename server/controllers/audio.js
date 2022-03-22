@@ -73,7 +73,7 @@ function executeScriptNlp(nlpExecutionFile) {
 
 exports.postAudio = async (req, res, next) => {
   console.log("saved audio file using multer", req.body.name);
-  nlpResponse = {};
+  let nlpResponse = {};
 
   asrInputFile = "/home/istl/demo/voice_channel_navigation/backend/data/inputAudio/" + req.body.name;
   console.log("asrInputFile: ",asrInputFile);
@@ -85,7 +85,7 @@ exports.postAudio = async (req, res, next) => {
   nlpResponseFilePath = "/home/istl/build/bbnl_english_nlp/out_dir/" + nlpResponseFileName;
   nlpExecutionFile = "python3.8 /home/istl/build/bbnl_english_nlp/01_process_intent_english.py " + asrResponseFilePath + " " + nlpResponseFilePath;
 
-  nlpResponse = {"gif_car_model": "Ford_Figo","tsp_files": ["001.tsp","002.tsp","003.tsp"], "excel_file": "YES"}; // For reference
+  nlpResponse = {"gif_car_model": "Ford_Figo","tsp_files": ["001.tsp","002.tsp","003.tsp"],"audio":["001.wav","002.wav","003.wav"] ,"excel_file": "YES"}; // For reference
 
   console.log("nlpResponse", nlpResponse);
   res.status(200).json({

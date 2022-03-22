@@ -11,8 +11,9 @@ class Dashboard extends Component {
     this.state = {
       tabledata: [],
       gifFile:'',
-      tspFiles:'',
-      TSPData:[]
+      TSPFiles:'',
+      TSPData:[],
+      AudioFiles:[]
     };
   }
 
@@ -54,12 +55,20 @@ class Dashboard extends Component {
     if(response.status===200){
       let arrdata =[]
       for(let i=0;i<response.data.nlpResponse.tsp_files.length;i++){
-     let adata = await  this.fetchTsp("http://localhost:3005/data/"+response.data.nlpResponse.tsp_files[i],{
-        crossDomain:true})
-        arrdata =[...arrdata,...adata]
+        arrdata.push("http://localhost:3005/data/"+response.data.nlpResponse.tsp_files[i])
+    //  let adata = await  this.fetchTsp("http://localhost:3005/data/"+response.data.nlpResponse.tsp_files[i],{
+    //     crossDomain:true})
+    //     arrdata =[...arrdata,...adata]
       }
-
-      this.setState({ TSPData: arrdata });
+     let audiofiles=[]
+      for(let i=0;i<response.data.nlpResponse.audio.length;i++){
+        audiofiles.push("http://localhost:3005/data/"+response.data.nlpResponse.audio[i])
+    //  let adata = await  this.fetchTsp("http://localhost:3005/data/"+response.data.nlpResponse.tsp_files[i],{
+    //     crossDomain:true})
+    //     arrdata =[...arrdata,...adata]
+      }
+      this.setState({ TSPFiles: arrdata,
+        AudioFiles: audiofiles});
       console.log(this.state.TSPData);
       this.setState({
         gifFile:"http://localhost:3005/data/car_gifs/"+ response.data.nlpResponse.gif_car_model+".gif",
@@ -94,7 +103,7 @@ class Dashboard extends Component {
    
         <ThreeDViewerCar GifFile={this.state.gifFile}/>
            
-        <ThreeDViewer GetData ={(data)=>this.GetData(data)} TSPData={this.state.TSPData} />
+        <ThreeDViewer GetData ={(data)=>this.GetData(data)} TSPFiles={this.state.TSPFiles} AudioFiles={this.state.AudioFiles} />
       </div>
       </div>
       </div>

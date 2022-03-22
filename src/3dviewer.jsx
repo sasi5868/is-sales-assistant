@@ -38,7 +38,7 @@ class ThreeDViewer extends Component {
     const result = await reader.read();
     const decoder = new TextDecoder("utf-8");
     const tsp = await decoder.decode(result.value);
-    console.log("tsp", tsp.split(/\r?\n/));
+    return tsp.split(/\r?\n/);
     this.setState({ TSPData: tsp.split(/\r?\n/) });
     return tsp;
   }
@@ -46,8 +46,7 @@ class ThreeDViewer extends Component {
     // this.fetchTsp();
     this.InitScene();
     this.loadModel();
-    this.audio = new Audio(audiofile);
-    this.audio.load();
+   
     this.Mp3Recorder = new MicRecorder({ bitRate: 128 });
     navigator.getUserMedia(
       { audio: true },
@@ -61,12 +60,26 @@ class ThreeDViewer extends Component {
       }
     );
   }
-
-  playAudio() {
+ async playAudioWithTsp(){
+    for(let i=0;i<this.props.TSPFiles.length;i++){ //AudioFiles
+     await this.playAudio(this.props.TSPFiles[i],this.props.AudioFiles[i])
+    }
+  }
+ async playAudio(tspfile,audiofile) {
+  let TspData = await this.fetchTsp();
+  await new Promise((resolve, reject) => {
     this.currentActionIndex = 0;
     let _this = this;
-    this.SetFrames(this.Anim);
-    const audioPromise = this.audio.play();
+ 
+    this.SetFrames(this.Anim,TspData);
+    this.audio = new Audio(audiofile);
+    this.audio.load();
+    this.audio.addEventListener("ended", function(){
+      _this.audio.currentTime = 0;
+      resolve(true)
+     
+ });
+     const audioPromise = this.audio.play();
     this.mixer.addEventListener("finished", this.playNextAction);
     _this.playNextAction();
     if (audioPromise !== undefined) {
@@ -79,6 +92,8 @@ class ThreeDViewer extends Component {
           console.info(err);
         });
     }
+  });
+   
   }
   onTransitionEnd(event) {
     event.target.remove();
@@ -118,7 +133,7 @@ class ThreeDViewer extends Component {
       });
     });
   }
-  SetFrames(animation) {
+  SetFrames(animation,TspData) {
     console.log(animation);
     this.actions = [];
     this.currentActionIndex = 0;
@@ -128,9 +143,9 @@ class ThreeDViewer extends Component {
     //   action.loop = THREE.LoopOnce;
     //   this.actions.push(action);
     // }
-    for (let i = 0; i < this.props.TSPData.length; i++) {
-      let char = this.props.TSPData[i].split(" ")[0];
-      let duration = this.props.TSPData[i].split(" ")[1];
+    for (let i = 0; i < TspData.length; i++) {
+      let char = TspData[i].split(" ")[0];
+      let duration = TspData[i].split(" ")[1];
       let clipchar = expressions.filter((item) =>
         item.char.includes(char.toUpperCase())
       );
@@ -334,7 +349,7 @@ class ThreeDViewer extends Component {
           <button
             className="button text-white bg-sky-600 hover:bg-sky-700 rounded-md px-2"
         
-            onClick={() => this.playAudio()}
+            onClick={() => this.playAudioWithTsp()}
           >
             Play
           </button>
