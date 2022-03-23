@@ -69,7 +69,7 @@ class ThreeDViewerCar extends Component {
       });
     });
   }
- 
+
 
   loadFBX() {
     let _this = this;
@@ -79,7 +79,7 @@ class ThreeDViewerCar extends Component {
     loader.load("models/Girl_With Expression_All2.fbx", function (object) {
       console.log(object);
       _this.scene.add(object);
-  
+
 
       object.traverse(function (child) {
         if (child.isMesh) {
@@ -119,7 +119,7 @@ class ThreeDViewerCar extends Component {
   InitScene() {
     this.camera = new THREE.PerspectiveCamera(
       45,
-      (window.innerWidth/2) / (window.innerHeight/2),
+      (window.innerWidth / 2) / (window.innerHeight / 2),
       1,
       20000
     );
@@ -129,7 +129,7 @@ class ThreeDViewerCar extends Component {
       canvas: this.mount,
       alpha: true,
     });
-    this.renderer.setSize(window.innerWidth/2, window.innerHeight/2);
+    this.renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
 
     const light = new THREE.AmbientLight(0x404040); // soft white light
     this.scene.add(light);
@@ -149,9 +149,8 @@ class ThreeDViewerCar extends Component {
   render() {
     return (
       <>
-
         <div>
-          <img className="w-full h-full object-cover" src={this.props.GifFile?this.props.GifFile:gifFile} ></img>
+          <img className="w-full h-full object-cover" src={this.props.GifFile ? this.props.GifFile : gifFile} ></img>
           {/* <canvas
             ref={(ref) => (this.mount = ref)}
             style={{
@@ -160,7 +159,7 @@ class ThreeDViewerCar extends Component {
             }}
           /> */}
         </div>
-        </>
+      </>
 
     );
   }

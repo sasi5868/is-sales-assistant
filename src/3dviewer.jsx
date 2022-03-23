@@ -8,6 +8,9 @@ import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHel
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import audiofile from "./data/TTS_ALIGN_FILE.wav";
 import MicRecorder from "mic-recorder-to-mp3";
+import { MdPlayCircleFilled, MdStopCircle, MdMic, MdMicOff } from "react-icons/fa";
+
+
 // import BackgroundImg from "./images/background.jpg"
 class ThreeDViewer extends Component {
   constructor(props) {
@@ -30,7 +33,7 @@ class ThreeDViewer extends Component {
     this.playNextAction = this.playNextAction.bind(this);
     this.animate = this.animate.bind(this);
     this.Mp3Recorder = null;
-    this.Anim=null;
+    this.Anim = null;
   }
   async fetchTsp() {
     const response = await fetch("data/TTS_ALIGN_FILE.tsp");
@@ -46,7 +49,7 @@ class ThreeDViewer extends Component {
     // this.fetchTsp();
     this.InitScene();
     this.loadModel();
-   
+
     this.Mp3Recorder = new MicRecorder({ bitRate: 128 });
     navigator.getUserMedia(
       { audio: true },
@@ -60,40 +63,40 @@ class ThreeDViewer extends Component {
       }
     );
   }
- async playAudioWithTsp(){
-    for(let i=0;i<this.props.TSPFiles.length;i++){ //AudioFiles
-     await this.playAudio(this.props.TSPFiles[i],this.props.AudioFiles[i])
+  async playAudioWithTsp() {
+    for (let i = 0; i < this.props.TSPFiles.length; i++) { //AudioFiles
+      await this.playAudio(this.props.TSPFiles[i], this.props.AudioFiles[i])
     }
   }
- async playAudio(tspfile,audiofile) {
-  let TspData = await this.fetchTsp();
-  await new Promise((resolve, reject) => {
-    this.currentActionIndex = 0;
-    let _this = this;
- 
-    this.SetFrames(this.Anim,TspData);
-    this.audio = new Audio(audiofile);
-    this.audio.load();
-    this.audio.addEventListener("ended", function(){
-      _this.audio.currentTime = 0;
-      resolve(true)
-     
- });
-     const audioPromise = this.audio.play();
-    this.mixer.addEventListener("finished", this.playNextAction);
-    _this.playNextAction();
-    if (audioPromise !== undefined) {
-      audioPromise
-        .then((_) => {
-          // autoplay started
-        })
-        .catch((err) => {
-          // catch dom exception
-          console.info(err);
-        });
-    }
-  });
-   
+  async playAudio(tspfile, audiofile) {
+    let TspData = await this.fetchTsp();
+    await new Promise((resolve, reject) => {
+      this.currentActionIndex = 0;
+      let _this = this;
+
+      this.SetFrames(this.Anim, TspData);
+      this.audio = new Audio(audiofile);
+      this.audio.load();
+      this.audio.addEventListener("ended", function () {
+        _this.audio.currentTime = 0;
+        resolve(true)
+
+      });
+      const audioPromise = this.audio.play();
+      this.mixer.addEventListener("finished", this.playNextAction);
+      _this.playNextAction();
+      if (audioPromise !== undefined) {
+        audioPromise
+          .then((_) => {
+            // autoplay started
+          })
+          .catch((err) => {
+            // catch dom exception
+            console.info(err);
+          });
+      }
+    });
+
   }
   onTransitionEnd(event) {
     event.target.remove();
@@ -133,7 +136,7 @@ class ThreeDViewer extends Component {
       });
     });
   }
-  SetFrames(animation,TspData) {
+  SetFrames(animation, TspData) {
     console.log(animation);
     this.actions = [];
     this.currentActionIndex = 0;
@@ -224,8 +227,8 @@ class ThreeDViewer extends Component {
         return prev.duration > current.duration ? prev : current;
       });
       console.log("max", max);
-    _this.Anim = max.clone();
-     
+      _this.Anim = max.clone();
+
 
       object.traverse(function (child) {
         if (child.isMesh) {
@@ -305,11 +308,11 @@ class ThreeDViewer extends Component {
   };
   blobToDataURL(blob, callback) {
     var a = new FileReader();
-    a.onload = function(e) {callback(e.target.result);}
+    a.onload = function (e) { callback(e.target.result); }
     a.readAsDataURL(blob);
-}
+  }
   stop = () => {
-    let _this=this;
+    let _this = this;
     this.Mp3Recorder.stop()
       .getMp3()
       .then(([buffer, blob]) => {
@@ -317,15 +320,15 @@ class ThreeDViewer extends Component {
         this.setState({ blobURL, isRecording: false });
         console.log(blobURL);
         setTimeout(() => {
-          this.blobToDataURL(blob, function(dataurl){
+          this.blobToDataURL(blob, function (dataurl) {
             setTimeout(() => {
               _this.props.GetData(dataurl)
             }, 1000);
-       
-        });
+
+          });
         }, 100);
-    
-      
+
+
       })
       .catch((e) => console.log(e));
   };
@@ -339,44 +342,43 @@ class ThreeDViewer extends Component {
           <canvas
             ref={(ref) => (this.mount = ref)}
             style={{
-              backgroundImage: "url('/envMaps/background.jpg')",
+              backgroundImage: "url('/envMaps/background_1.jpg')",
               backgroundSize: "cover",
             }}
           />
         </div>
         <div className="absolute z-10 object-left-bottom bottom-0">
-        <div className=" grid grid-flow-col auto-cols-max gap-2 mb-3">
-          <button
-            className="button text-white bg-sky-600 hover:bg-sky-700 rounded-md px-2"
-        
-            onClick={() => this.playAudioWithTsp()}
-          >
-            Play
-          </button>
-          {this.state.isRecording ? (
+          <div className=" grid grid-flow-col auto-cols-max gap-2 mb-3">
             <button
-            className="button text-white bg-red-600 hover:bg-sky-700 rounded-md px-2"
-              onClick={() => this.stop()}
-              disabled={!this.state.isRecording}
+              className="button text-white bg-sky-600 hover:bg-sky-700 rounded-md px-2"
+              onClick={() => this.playAudioWithTsp()}
             >
-              Stop
+              Play
             </button>
-          ) : (
-            <button
-            className="button text-white bg-sky-600 hover:bg-sky-700 rounded-md px-2"
-              onClick={() => this.start()}
-              disabled={this.state.isRecording}
-            >
-              Record
-            </button>
-          )}
-          {this.state.blobURL&&(
-   <audio className="h-6" src={this.state.blobURL} controls="controls" />
-          )}
-       
+            {this.state.isRecording ? (
+              <button
+                className="button text-white bg-red-600 hover:bg-sky-700 rounded-md px-2"
+                onClick={() => this.stop()}
+                disabled={!this.state.isRecording}
+              >
+                Stop
+              </button>
+            ) : (
+              <button
+                className="button text-white bg-sky-600 hover:bg-sky-700 rounded-md px-2"
+                onClick={() => this.start()}
+                disabled={this.state.isRecording}
+              >
+                Record
+              </button>
+            )}
+            {this.state.blobURL && (
+              <audio className="h-6" src={this.state.blobURL} controls="controls" />
+            )}
+
+          </div>
         </div>
-        </div>
-    
+
       </>
     );
   }
