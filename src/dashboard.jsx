@@ -75,7 +75,7 @@ class Dashboard extends Component {
         TSPFiles: arrdata,
         AudioFiles: audiofiles,
       });
-      console.log(this.state.TSPData);
+      // console.log(this.state.TSPData);
       // this.setState({tabledata: "http://localhost:3005/data/combined_all_cars.xlsx"});
       this.setState({
         gifFile:
@@ -104,7 +104,12 @@ class Dashboard extends Component {
           <TableCar />
         </div>
         <div className="dashBoardGraphicsContainer">
-          <h3>Graphics Container</h3>
+          <ThreeDViewerCar GifFile={this.state.gifFile} />
+          <ThreeDViewer
+            GetData={(data) => this.GetData(data)}
+            TSPFiles={this.state.TSPFiles}
+            AudioFiles={this.state.AudioFiles}
+          />
         </div>
       </div>
     );

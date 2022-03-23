@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 
 import './Table.css';
 
-import CarsDataJSON from './data/cars_array_data_dummy';
+import CarsDataJSON from './data/cars_array_final';
 
 class TableCar extends Component {
   constructor(props) {
@@ -67,7 +67,7 @@ class TableCar extends Component {
 
   rowHeaderRestBody(dataHeader) {
     return this.state.tabledata.map((valObj) => {
-      console.info(valObj[dataHeader]);
+      // console.info(valObj[dataHeader]);
       return <td>{valObj[dataHeader]}</td>;
     });
   }
