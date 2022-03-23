@@ -72,7 +72,7 @@ class Dashboard extends Component {
         AudioFiles: audiofiles
       });
       console.log(this.state.TSPData);
-      this.setState({tabledata: "http://localhost:3005/data/combined_all_cars.xlsx"});
+      // this.setState({tabledata: "http://localhost:3005/data/combined_all_cars.xlsx"});
       this.setState({
         gifFile: "http://localhost:3005/data/car_gifs/" + response.data.nlpResponse.gif_car_model + ".gif",
       })
