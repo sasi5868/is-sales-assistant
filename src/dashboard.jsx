@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Papa from 'papaparse';
 import TableCar from './Table';
+import TableMod from './Table_Modified'
 import ThreeDViewer from './3dviewer';
 import ThreeDViewerCar from './3dviewer car';
 import axios from 'axios';
@@ -14,6 +15,8 @@ class Dashboard extends Component {
       TSPFiles: '',
       TSPData: [],
       AudioFiles: [],
+      CarToShow:[],
+      RowsToHighlight:[]
     };
   }
 
@@ -71,9 +74,14 @@ class Dashboard extends Component {
         //     crossDomain:true})
         //     arrdata =[...arrdata,...adata]
       }
+      // TODO Set the Cars & Rows to highlight to Show to the State
+
+
       this.setState({
         TSPFiles: arrdata,
         AudioFiles: audiofiles,
+        CarToShow: response.data.nlpResponse.cars_to_show,
+        RowsToHighlight: response.data.nlpResponse.rows_to_highlight
       });
       // console.log(this.state.TSPData);
       // this.setState({tabledata: "http://localhost:3005/data/combined_all_cars.xlsx"});
@@ -84,7 +92,8 @@ class Dashboard extends Component {
           '.gif',
       });
     }
-    console.log(response);
+    console.log(this.state.RowsToHighlight);
+    console.log(this.state.CarToShow);
   }
 
   async fetchTsp(url) {
@@ -101,7 +110,8 @@ class Dashboard extends Component {
     return (
       <div className="dashboardContainer">
         <div className="infoContainer">
-          <TableCar />
+          <TableCar CarToShow={this.state.CarToShow} RowsToHighlight={this.state.RowsToHighlight} />
+          {/* <TableMod carsShow={this.state.CarToShow} rowsHighlight={this.state.RowsToHighlight} /> */}
         </div>
         <div className="dashBoardGraphicsContainer">
           <ThreeDViewerCar GifFile={this.state.gifFile} />

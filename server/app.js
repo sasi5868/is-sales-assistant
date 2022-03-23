@@ -1,26 +1,25 @@
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 const audioRoute = require("./routes/audio");
 // const audioBbnlRoute = require("./routes/audio_bbnl");
 const devTestRoute = require("./routes/devTest");
-const userRoute = require("./routes/user");
 const cors = require("cors");
 const app = express();
 
 // mongodb+srv://sasi:<password>@cluster0.44riq.azure.mongodb.net/<dbname>?retryWrites=true&w=majority
 
-mongoose
-  .connect("mongodb+srv://sasi:yUHAHVd63Ev3DBi5@cluster0.44riq.azure.mongodb.net/cluster0?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-  .then(() => {
-    console.log("Connected to database!");
-  })
-  .catch((err) => {
-    console.log("Connection failed!",err);
-  });
+// mongoose
+//   .connect("mongodb+srv://sasi:yUHAHVd63Ev3DBi5@cluster0.44riq.azure.mongodb.net/cluster0?retryWrites=true&w=majority",
+//   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+//   .then(() => {
+//     console.log("Connected to database!");
+//   })
+//   .catch((err) => {
+//     console.log("Connection failed!",err);
+//   });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,7 +44,6 @@ app.use((req, res, next) => {
 app.use("/api/audio", audioRoute);
 // app.use("/api/bbnl/audio", audioBbnlRoute);
 app.use("/api/devTest", devTestRoute);
-app.use("/api/user", userRoute);
 // GET home page.
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));

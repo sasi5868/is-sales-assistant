@@ -12,37 +12,73 @@ class TableCar extends Component {
     this.state = {
       tabledata: [],
       tableCarArray: [],
+      carsShow:[],
+      carsHighlight:[]
     };
   }
+
+
 
   componentDidMount() {
     this.ExtractData();
     var keyCarObject = Object.keys(CarsDataJSON[0]);
     console.info(keyCarObject);
     this.renderColumnCarMetadata(keyCarObject);
+
+
+    console.info(`The value of the Table State in ${this.state.carsShow}  && ${this.state.carsHighlight}`)
   }
 
-  async fetchCsv() {
-    const response = await fetch('data/sample.csv');
-    const reader = response.body.getReader();
-    const result = await reader.read();
-    const decoder = new TextDecoder('utf-8');
-    const csv = await decoder.decode(result.value);
-    console.log('csv', csv);
-    return csv;
+  updateTableData(cardata,carhighlight){
+    let theUpdatedCarTable = this.state.carsShow.filter(val=>{
+            cardata.includes(val.mod_variants)
+    })
+
+    this.setState({tabledata:theUpdatedCarTable})
   }
 
-  renderRowData() {
-    return (
-      <>
-        <td>{}</td>
-        <td>6</td>
-        <td>midfielder</td>
-        <td>83</td>
-        <td>6</td>
-        <td>11</td>
-      </>
-    );
+
+  // static getDerivedStateFromProps(nextProps,PrevState){
+  //   if(nextProps.carsShow !== PrevState.carsShow){
+  //     return ({carsShow:nextProps.carsShow})
+  //   } 
+
+  //   if(nextProps.rowsHighlight !== PrevState.rowsHighlight){
+  //     return ({carsHighlight:nextProps.rowsHighlight})
+  //   }
+
+  //   // Once the component updates change the value of the state table data
+  //   this.updateTableData(this.state.carsShow,this.state.carsHighlight)
+    
+  // }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.carsShow!== this.props.carsShow){
+      this.setState({
+        carsShow: this.props.CarToShow
+      })
+    }
+
+    if(prevProps.rowsHighlight!== this.props.rowsHighlight){
+      this.setState({
+        carsHighlight: this.props.RowsToHighlight
+      })
+
+      
+    }
+
+  }
+
+
+
+
+  componentWillUnmount(){
+    this.setState({
+      tabledata: [],
+      tableCarArray: [],
+      carsShow:[],
+      carsHighlight:[]
+    })
   }
 
   ExtractData() {
@@ -61,6 +97,7 @@ class TableCar extends Component {
     );
   }
 
+
   renderColumnCarMetadata(carMetadataArray) {
     this.setState({ tableCarArray: carMetadataArray });
   }
@@ -75,36 +112,8 @@ class TableCar extends Component {
   render() {
     return (
       <>
-        {/* {this.state.tabledata && this.state.tabledata.length > 0 && (
-          <div className="">
-            <table
-              className="table w-full h-screen"
-              style={{ border: '1px solid black' }}
-            >
-              {this.state.tabledata.map((item, index) => {
-                return (
-                  <tr style={{ border: '1px solid black' }}>
-                    <>
-                      {index === 2 ? (
-                        <td colSpan={24} style={{ backgroundColor: 'gray' }}>
-                          EmtpyRow sfv ext-sm font-medium text-gray-900
-                          whitespace-nowrap dark:text-gray-600{' '}
-                        </td>
-                      ) : (
-                        <>
-                          {item.map((cell) => (
-                            <td> {cell}</td>
-                          ))}
-                        </>
-                      )}
-                    </>
-                  </tr>
-                );
-              })}
-            </table>
-          </div>
-        )} */}
-        <div className="tableContainer">
+     
+        <div key="childComponent" className="tableContainer">
           <table>
             <thead>
               <tr>
@@ -128,27 +137,7 @@ class TableCar extends Component {
               })}
             </tbody>
           </table>
-          {/* <table id="vertical-1">
-            <caption>First Way</caption>
-            <tr>
-              <th>Header 1</th>
-              <td>data</td>
-              <td>data</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <th>Header 2</th>
-              <td>data</td>
-              <td>data</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <th>Header 2</th>
-              <td>data</td>
-              <td>data</td>
-              <td>data</td>
-            </tr>
-          </table> */}
+         
         </div>
       </>
     );

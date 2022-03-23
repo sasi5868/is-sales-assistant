@@ -103,12 +103,14 @@ code {
   display: flex;
   justify-content: space-between;
 }
+
 .tableContainer {
   height: 100%;
   width: 100%;
   overflow: scroll;
 }
+
 .infoContainer {
   padding: 1rem;
-  width: 60%;
+  width: 55%;
 }
