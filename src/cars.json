@@ -1,0 +1,27 @@
+{
+  "mod_variants":{
+      "name":"Model Variants",
+      "data":[F petrol	Ford Figo Titanium petrol	Ford Figo Titanium AT petrol	Ford Figo Titanium Diesel	Ford Ecosport ambiente petrol	Ford Ecosport ambiente diesel	Ford Ecosport trend petrol	Ford Ecosport trend diesel	Ford Ecosport titanium petrol	Ford Ecosport titanium diesel	Honda City V MT Petrol	Honda City V CVT Petrol	Honda City VX MT Petrol	Honda City V MT Diesel	Honda City VX MT Diesel	Honda City ZX CVT Petrol	Honda City VX CVT Petrol	Honda Jazz VX MT Petrol	Honda Jazz ZX MT Petrol	Honda Jazz VX CVT Petrol	Honda Jazz ZX CVT Petrol	Hyundai grand i10 NIOS Magna MT Petrol	Hyundai grand i10 NIOS Magna AMT Petrol	Hyundai grand i10 NIOS Sportz MT Petrol	Hyundai grand i10 NIOS Sportz MT Diesel	Hyundai grand i10 NIOS Asta CRDi	Hyundai verna SX MT Petrol	Hyundai verna SX MT Diesel	Hyundai verna SX AT Diesel	Hyundai verna Splus MT Petrol	Hyundai verna SPlus MT Diesel	Mahindra Bolero Neo N8 MT Diesel	Mahindra Bolero Neo N10 MT Diesel	Mahindra Bolero Neo N4 MT Diesel	Mahindra XUV700 MX MT Petrol	Mahindra XUV700 MX MT Diesel	Mahindra XUV700 AX5 Automatic Petrol	Mahindra XUV700 AX5 Automatic Diesel	Mahindra XUV700 AX7 Automatic Petrol	Mahindra XUV700 AX7 Automatic Diesel	Maruti Suzuki Baleno Sigma MT Petrol	Maruti Suzuki Baleno Delta MT Petrol	Maruti Suzuki Baleno Zeta MT Petrol	Maruti Suzuki Baleno Zeta Automatic Petrol	Maruti Suzuki Baleno Delta Automatic Petrol	Maruti Suzuki Baleno Alpha MT Petrol	Maruti Suzuki Dzire LXI MT Petrol	Maruti Suzuki Dzire VXI MT Petrol	Tata Nexon XZ Petrol	Tata Nexon XM Petrol	Tata Nexon XMA AMT Petrol	Tata Nexon XM MT Diesel	Tata Nexon XMA AMT Diesel	Tata Tiago XT MT Petrol	Tata Tiago XZ MT Petrol	Tata Tiago XTA Automatic Petrol	Tata Tiago XZPlus MT Petrol	Toyota Innova 2.5 VX MT Diesel	Toyota Innova 2.5 ZX MT Diesel	Toyota Innova 2.5 GX MT Diesel	Toyota Urban Cruiser Mid MT Petrol	Toyota Urban Cruiser High MT Petrol	Toyota Urban Cruiser Premium MT Petrol	Toyota Urban Cruiser Premium Automatic Petrol	Toyota Urban Cruiser High Automatic Petrol
+      ]
+  },
+  
+  ""
+  
+}
+
+
+[{
+ "mod_variants":"Toyota Urban Cruiser Premium MT Petrol",
+ "gen_info":"For those who cruise their way to respect, here is a young urban SUV that is built to take you there. Wherever you go, respect follows.",
+ "bod_type":"SUV",
+
+
+
+},{
+    "mod_variants":"Toyota Urban Cruiser Premium Automatic Petrol",
+    "gen_info":"For those who cruise their way to respect, here is a young urban SUV that is built to take you there. Wherever you go, respect follows.",
+    "bod_type":"SUV",
+}]
+
+
+{"cars_to_show": ["Toyota Urban Cruiser Premium MT Petrol","Toyota Urban Cruiser Premium MT Diesel"]}

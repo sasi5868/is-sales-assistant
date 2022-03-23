@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ThreeDViewer from './3dviewer';
+// import ThreeDViewer from './3dviewer';
 import Dashboard from './dashboard';
 
 ReactDOM.render(
