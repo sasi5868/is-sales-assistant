@@ -101,20 +101,8 @@ exports.postAudio = async (req, res, next) => {
     gif_car_model: 'Ford_Figo',
     tsp_files: ['001.tsp', '002.tsp', '003.tsp'],
     audio: ['001.wav', '002.wav', '003.wav'],
-    cars_to_show: [
-      'Ford Figo Ambiente petrol',
-      'Ford Figo Titanium petrol',
-      'Tata Nexon XM MT Diesel',
-      'Toyota Innova 2.5 ZX MT Diesel',
-      'Tata Tiago XT MT Petrol'
-    ],
-    rows_to_highlight: [
-      'bod_colors',
-      'eng_drive_mode',
-      'eng_mileage',
-      'eng_max_out',
-      'eng_displacement',
-    ],
+    highlight_cols: [1, 2, 3, 4, 5],
+    highlight_rows: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
   }; // For reference
 
   console.log('nlpResponse', nlpResponse);
