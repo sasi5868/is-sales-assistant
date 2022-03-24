@@ -106,6 +106,7 @@ exports.postAudio = async (req, res, next) => {
       'Ford Figo Titanium petrol',
       'Tata Nexon XM MT Diesel',
       'Toyota Innova 2.5 ZX MT Diesel',
+      'Tata Tiago XT MT Petrol'
     ],
     rows_to_highlight: [
       'bod_colors',

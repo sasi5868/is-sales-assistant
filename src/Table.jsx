@@ -13,7 +13,7 @@ class TableCar extends Component {
       tabledata: [],
       tableCarArray: [],
       carsShow:[],
-      carsHighlight:[]
+      rowsHighlight:[]
     };
   }
 
@@ -26,16 +26,28 @@ class TableCar extends Component {
     this.renderColumnCarMetadata(keyCarObject);
 
 
-    console.info(`The value of the Table State in ${this.state.carsShow}  && ${this.state.carsHighlight}`)
+    console.info(`The value of the Table State in ${this.state.carsShow}  && ${this.state.rowsHighlight}`)
   }
 
-  updateTableData(cardata,carhighlight){
-    let theUpdatedCarTable = this.state.carsShow.filter(val=>{
-            cardata.includes(val.mod_variants)
+  updateTableData(carsShow,rowsHighlight){
+    let theUpdatedCarTable = [];
+    CarsDataJSON.map((val) => {
+      carsShow.map(carShow => {
+        if(carShow == val.mod_variants) {
+          theUpdatedCarTable.push(val);
+        }
+      })
     })
-
     this.setState({tabledata:theUpdatedCarTable})
   }
+
+  componentWillReceiveProps(){
+    console.log("this.props.carsShow:",this.props.carsShow);
+    console.log("this.props.rowsHighlight:",this.props.rowsHighlight);
+      this.setState({ carsShow: this.props.carsShow });
+      this.setState({ rowsHighlight: this.props.rowsHighlight });
+      this.updateTableData(this.props.carsShow,this.props.rowsHighlight);
+}
 
 
   // static getDerivedStateFromProps(nextProps,PrevState){
@@ -52,34 +64,34 @@ class TableCar extends Component {
     
   // }
 
-  componentDidUpdate(prevProps) {
-    if(prevProps.carsShow!== this.props.carsShow){
-      this.setState({
-        carsShow: this.props.CarToShow
-      })
-    }
+  // componentDidUpdate(prevProps) {
+  //   if(prevProps.carsShow!== this.props.carsShow){
+  //     this.setState({
+  //       carsShow: this.props.CarToShow
+  //     })
+  //   }
 
-    if(prevProps.rowsHighlight!== this.props.rowsHighlight){
-      this.setState({
-        carsHighlight: this.props.RowsToHighlight
-      })
+  //   if(prevProps.rowsHighlight!== this.props.rowsHighlight){
+  //     this.setState({
+  //       carsHighlight: this.props.RowsToHighlight
+  //     })
 
       
-    }
+  //   }
 
-  }
-
-
+  // }
 
 
-  componentWillUnmount(){
-    this.setState({
-      tabledata: [],
-      tableCarArray: [],
-      carsShow:[],
-      carsHighlight:[]
-    })
-  }
+
+
+  // componentWillUnmount(){
+  //   this.setState({
+  //     tabledata: [],
+  //     tableCarArray: [],
+  //     carsShow:[],
+  //     rowsHighlight:[]
+  //   })
+  // }
 
   ExtractData() {
     // const csvData = Papa.parse(await this.fetchCsv());

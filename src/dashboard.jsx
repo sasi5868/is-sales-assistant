@@ -15,8 +15,8 @@ class Dashboard extends Component {
       TSPFiles: '',
       TSPData: [],
       AudioFiles: [],
-      CarToShow:[],
-      RowsToHighlight:[]
+      carsShow:[],
+      rowsHighlight:[]
     };
   }
 
@@ -39,10 +39,9 @@ class Dashboard extends Component {
   async GetData(audiodata) {
     const formData = new FormData();
 
-    const file = this.dataURLtoFile(audiodata, 'audiofile.mp3');
+    const file = this.dataURLtoFile(audiodata, 'audiofile.wav');
     formData.append('audio', file);
-    formData.append('name', 'audiofile.pm3');
-    formData.append('languageId', 0);
+    formData.append('name', 'audiofile.wav');
 
     const config = {
       headers: {
@@ -80,8 +79,8 @@ class Dashboard extends Component {
       this.setState({
         TSPFiles: arrdata,
         AudioFiles: audiofiles,
-        CarToShow: response.data.nlpResponse.cars_to_show,
-        RowsToHighlight: response.data.nlpResponse.rows_to_highlight
+        carsShow: response.data.nlpResponse.cars_to_show,
+        rowsHighlight: response.data.nlpResponse.rows_to_highlight
       });
       // console.log(this.state.TSPData);
       // this.setState({tabledata: "http://localhost:3005/data/combined_all_cars.xlsx"});
@@ -92,8 +91,8 @@ class Dashboard extends Component {
           '.gif',
       });
     }
-    console.log(this.state.RowsToHighlight);
-    console.log(this.state.CarToShow);
+    console.log(this.state.carsShow);
+    console.log(this.state.rowsHighlight);
   }
 
   async fetchTsp(url) {
@@ -110,8 +109,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboardContainer">
         <div className="infoContainer">
-          <TableCar CarToShow={this.state.CarToShow} RowsToHighlight={this.state.RowsToHighlight} />
-          {/* <TableMod carsShow={this.state.CarToShow} rowsHighlight={this.state.RowsToHighlight} /> */}
+          <TableCar carsShow={this.state.carsShow} rowsHighlight={this.state.rowsHighlight} />
         </div>
         <div className="dashBoardGraphicsContainer">
           <ThreeDViewerCar GifFile={this.state.gifFile} />
