@@ -10,10 +10,8 @@ const userRoute = require("./routes/user");
 const cors = require("cors");
 const app = express();
 
-// mongodb+srv://sasi:<password>@cluster0.44riq.azure.mongodb.net/<dbname>?retryWrites=true&w=majority
-
 mongoose
-  .connect("mongodb+srv://sasi:yUHAHVd63Ev3DBi5@cluster0.44riq.azure.mongodb.net/cluster0?retryWrites=true&w=majority",
+  .connect("",
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
   .then(() => {
     console.log("Connected to database!");
